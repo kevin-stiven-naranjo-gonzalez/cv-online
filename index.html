@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin Naranjo - RPA Developer | Python Specialist</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Calibri', 'Arial', sans-serif; 
+            line-height: 1.5; 
+            padding: 30px 50px; 
+            max-width: 850px; 
+            margin: 0 auto; 
+            background: white; 
+            color: #333;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .lang-toggle {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+        
+        .lang-toggle:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+        
+        .download-pdf {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-pdf:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .download-pdf svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        header { 
+            text-align: center; 
+            margin-bottom: 25px; 
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-top: 60px;
+        }
+        h1 { 
+            font-size: 28px; 
+            color: #2c3e50; 
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .subtitle { 
+            font-size: 14px; 
+            color: #555; 
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .contact-info { 
+            font-size: 11px; 
+            color: #666;
+            margin-top: 8px;
+        }
+        .contact-info a { 
+            color: #0066cc; 
+            text-decoration: underline;
+            margin: 0 8px;
+            font-weight: 500;
+        }
+        .contact-info a:hover { color: #004499; }
+        
+        h2 { 
+            font-size: 16px; 
+            color: #2c3e50; 
+            margin-top: 20px; 
+            margin-bottom: 10px; 
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .summary { 
+            font-size: 12px; 
+            text-align: justify;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .skills-grid { 
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .skill-item { 
+            font-size: 11px;
+            padding: 4px 0;
+        }
+        .skill-item strong { 
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .experience-item { 
+            margin-bottom: 18px;
+        }
+        .job-header { 
+            display: flex; 
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .job-title { 
+            font-size: 13px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .company { 
+            font-size: 12px;
+            color: #555;
+            font-style: italic;
+        }
+        .date { 
+            font-size: 11px;
+            color: #777;
+            font-weight: 500;
+        }
+        
+        ul { 
+            margin-left: 20px;
+            margin-top: 6px;
+        }
+        li { 
+            font-size: 11px;
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        
+        .projects-grid {
+            display: grid;
+            gap: 10px;
+        }
+        .project-item {
+            font-size: 11px;
+            padding-left: 15px;
+            border-left: 3px solid #3498db;
+            margin-bottom: 8px;
+        }
+        .project-item strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+        .cert-item {
+            font-size: 11px;
+            padding: 3px 0;
+        }
+        
+        .education-item {
+            margin-bottom: 12px;
+        }
+        
+        [lang]:not([lang="es"]) { display: none; }
+        body.lang-en [lang="es"] { display: none; }
+        body.lang-en [lang="en"] { display: block; }
+        body.lang-en [lang="en"].skills-grid,
+        body.lang-en [lang="en"].cert-grid { display: grid; }
+        
+        @media print {
+            body { padding: 20px; }
+            .contact-info a { 
+                color: #0066cc;
+                text-decoration: underline;
+            }
+            .controls { display: none; }
+            header { margin-top: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                position: static;
+                margin: 0 auto 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            header { margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button class="lang-toggle" onclick="toggleLanguage()">
+            <span id="lang-icon">🇺🇸</span>
+            <span id="lang-text">View in English</span>
+        </button>
+        <a href="Kevin_Naranjo_Resume_ES.pdf" download class="download-pdf" id="download-btn">
+            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            <span id="download-text">Descargar PDF</span>
+        </a>
+    </div>
+    
+    <header>
+        <h1>KEVIN STIVEN NARANJO GONZALEZ</h1>
+        <div class="subtitle" lang="en">RPA Developer | Python Specialist | Telecommunications Engineering (In Progress)</div>
+        <div class="subtitle" lang="es">Desarrollador RPA | Especialista Python | Ingeniería en Telecomunicaciones (En Curso)</div>
+        <div class="contact-info">
+            +57 321 3210397 | 
+            <a href="mailto:kevinstivennaranjo13@gmail.com">kevinstivennaranjo13@gmail.com</a> | 
+            <span lang="en">Bogota, Colombia</span>
+            <span lang="es">Bogotá, Colombia</span> |
+            <a href="https://linkedin.com/in/kevin-stiven-naranjo-gonzalez" target="_blank">LinkedIn</a> |
+            <a href="https://github.com/kevin-stiven-naranjo-gonzalez" target="_blank">GitHub</a>
+        </div>
+    </header>
+
+    <h2 lang="en">Professional Summary</h2>
+    <h2 lang="es">Resumen Profesional</h2>
+    <p class="summary" lang="en">
+        RPA Developer and Python automation specialist with 2+ years of experience designing and implementing process automation solutions that eliminate manual workflows. Expert in building scalable automation frameworks using Python, RPA platforms (UiPath, RocketBot), and REST API integrations. Proven track record reducing processing times by 95% through intelligent automation. Strong technical foundation in data processing, IAM systems, and enterprise application integration. Currently pursuing Telecommunications Engineering degree with focus on software development and system optimization.
+    </p>
+    <p class="summary" lang="es">
+        Desarrollador RPA y especialista en automatización Python con más de 2 años de experiencia diseñando e implementando soluciones de automatización de procesos que eliminan flujos de trabajo manuales. Experto en construcción de frameworks de automatización escalables usando Python, plataformas RPA (UiPath, RocketBot) e integraciones REST API. Historial comprobado reduciendo tiempos de procesamiento en 95% mediante automatización inteligente. Sólida base técnica en procesamiento de datos, sistemas IAM e integración de aplicaciones empresariales. Actualmente cursando Ingeniería en Telecomunicaciones con enfoque en desarrollo de software y optimización de sistemas.
+    </p>
+
+    <h2 lang="en">Technical Skills</h2>
+    <h2 lang="es">Habilidades Técnicas</h2>
+    <div class="skills-grid" lang="en">
+        <div class="skill-item"><strong>Automation & RPA:</strong> UiPath, RocketBot, Python scripting, workflow automation, process optimization</div>
+        <div class="skill-item"><strong>Programming:</strong> Python (pandas, requests, BeautifulSoup), SQL, REST API development, JSON/XML parsing</div>
+        <div class="skill-item"><strong>Integration:</strong> JIRA API, Active Directory, ITSM platforms, OCR engines, database connectors</div>
+        <div class="skill-item"><strong>Data Processing:</strong> Excel/CSV automation, ETL pipelines, database management, data extraction</div>
+        <div class="skill-item"><strong>Infrastructure:</strong> Windows Server, Linux, IAM tools, logging frameworks, audit systems</div>
+        <div class="skill-item"><strong>Security:</strong> Access control automation, backup systems, ransomware prevention, compliance monitoring</div>
+    </div>
+    <div class="skills-grid" lang="es">
+        <div class="skill-item"><strong>Automatización & RPA:</strong> UiPath, RocketBot, scripting Python, automatización de flujos, optimización de procesos</div>
+        <div class="skill-item"><strong>Programación:</strong> Python (pandas, requests, BeautifulSoup), SQL, desarrollo REST API, parsing JSON/XML</div>
+        <div class="skill-item"><strong>Integración:</strong> JIRA API, Active Directory, plataformas ITSM, motores OCR, conectores de bases de datos</div>
+        <div class="skill-item"><strong>Procesamiento de Datos:</strong> Automatización Excel/CSV, pipelines ETL, gestión de bases de datos, extracción de datos</div>
+        <div class="skill-item"><strong>Infraestructura:</strong> Windows Server, Linux, herramientas IAM, frameworks de logging, sistemas de auditoría</div>
+        <div class="skill-item"><strong>Seguridad:</strong> Automatización de control de accesos, sistemas de backup, prevención ransomware, monitoreo de cumplimiento</div>
+    </div>
+
+    <h2 lang="en">Professional Experience</h2>
+    <h2 lang="es">Experiencia Profesional</h2>
+    
+    <div class="experience-item">
+        <div class="job-header">
+            <div>
+                <div class="job-title" lang="en">Access Management Specialist</div>
+                <div class="job-title" lang="es">Especialista en Gestión de Accesos</div>
+                <div class="company" lang="en">Seguros Bolivar S.A. | Bogota, Colombia (Remote)</div>
+                <div class="company" lang="es">Seguros Bolívar S.A. | Bogotá, Colombia (Remoto)</div>
+            </div>
+            <div class="date" lang="en">Dec 2025 - Present</div>
+            <div class="date" lang="es">Dic 2025 - Presente</div>
+        </div>
+        <ul lang="en">
+            <li>Manage end-to-end lifecycle of access provisioning for critical insurance systems, ensuring regulatory compliance and security controls</li>
+            <li>Develop Python automation scripts and RPA workflows to streamline access request processing, reducing approval cycles by 70%</li>
+            <li>Build automated reporting solutions for access audits and compliance tracking using pandas and REST APIs</li>
+            <li>Implement security controls for IAM processes, strengthening access governance in regulated financial environment</li>
+            <li>Collaborate with security teams to resolve complex access incidents and optimize authentication workflows</li>
+        </ul>
+        <ul lang="es">
+            <li>Gestiono el ciclo completo de aprovisionamiento de accesos para sistemas críticos de seguros, asegurando cumplimiento normativo y controles de seguridad</li>
+            <li>Desarrollo scripts de automatización Python y flujos RPA para optimizar procesamiento de solicitudes de acceso, reduciendo ciclos de aprobación en 70%</li>
+            <li>Construyo soluciones de reportería automatizada para auditorías de acceso y seguimiento de cumplimiento usando pandas y REST APIs</li>
+            <li>Implemento controles de seguridad para procesos IAM, fortaleciendo gobernanza de accesos en entorno financiero regulado</li>
+            <li>Colaboro con equipos de seguridad para resolver incidentes complejos de acceso y optimizar flujos de autenticación</li>
+        </ul>
+    </div>
+
+    <div class="experience-item">
+        <div class="job-header">
+            <div>
+                <div class="job-title" lang="en">RPA Developer & Technical Support Specialist L1</div>
+                <div class="job-title" lang="es">Desarrollador RPA & Especialista Soporte Técnico L1</div>
+                <div class="company">Stefanini Latam | Bogota, Colombia</div>
+            </div>
+            <div class="date" lang="en">Dec 2023 - Dec 2025</div>
+            <div class="date" lang="es">Dic 2023 - Dic 2025</div>
+        </div>
+        <ul lang="en">
+            <li>Designed and deployed 15+ Python automation scripts, reducing average ticket processing time from 30 minutes to 30 seconds (95% improvement)</li>
+            <li>Developed JIRA REST API integration framework for automated ticket creation, assignment, and workflow management</li>
+            <li>Built RPA bots using RocketBot to automate repetitive support tasks including user provisioning, password resets, and system configurations</li>
+            <li>Created data processing pipelines using pandas for bulk operations on corporate datasets (Excel, CSV, SQL)</li>
+            <li>Implemented OCR document extraction system to digitize and process technical documentation automatically</li>
+            <li>Developed Active Directory automation scripts for user management and access control operations</li>
+            <li>Established comprehensive audit logging system for process traceability and SLA compliance reporting</li>
+            <li>Provided L1 technical support for 200+ corporate users, maintaining 98% SLA compliance rate</li>
+        </ul>
+        <ul lang="es">
+            <li>Diseñé y desplegué más de 15 scripts de automatización Python, reduciendo tiempo promedio de procesamiento de tickets de 30 minutos a 30 segundos (mejora del 95%)</li>
+            <li>Desarrollé framework de integración JIRA REST API para creación, asignación y gestión automatizada de tickets</li>
+            <li>Construí bots RPA usando RocketBot para automatizar tareas repetitivas de soporte incluyendo aprovisionamiento de usuarios, reseteo de contraseñas y configuraciones de sistemas</li>
+            <li>Creé pipelines de procesamiento de datos usando pandas para operaciones masivas en datasets corporativos (Excel, CSV, SQL)</li>
+            <li>Implementé sistema de extracción OCR de documentos para digitalizar y procesar documentación técnica automáticamente</li>
+            <li>Desarrollé scripts de automatización Active Directory para gestión de usuarios y operaciones de control de acceso</li>
+            <li>Establecí sistema integral de logging de auditoría para trazabilidad de procesos y reportes de cumplimiento SLA</li>
+            <li>Brindé soporte técnico L1 a más de 200 usuarios corporativos, manteniendo 98% de cumplimiento SLA</li>
+        </ul>
+    </div>
+
+    <h2 lang="en">Key Automation Projects</h2>
+    <h2 lang="es">Proyectos Clave de Automatización</h2>
+    <div class="projects-grid">
+        <div class="project-item" lang="en">
+            <strong>JIRA Ticket Automation Framework:</strong> Built Python-based REST API integration reducing manual ticket processing from 30 min to 30 sec. Handles bulk ticket creation, status updates, and assignment routing. Technologies: Python, requests library, JSON parsing, error handling.
+        </div>
+        <div class="project-item" lang="es">
+            <strong>Framework de Automatización de Tickets JIRA:</strong> Construí integración REST API basada en Python reduciendo procesamiento manual de tickets de 30 min a 30 seg. Maneja creación masiva de tickets, actualizaciones de estado y enrutamiento de asignaciones. Tecnologías: Python, librería requests, parsing JSON, manejo de errores.
+        </div>
+        
+        <div class="project-item" lang="en">
+            <strong>Enterprise Data Processing Pipeline:</strong> Developed pandas-based ETL solution processing 10,000+ rows of corporate data daily. Automated Excel/CSV transformation, SQL database updates, and report generation. Eliminated 15 hours/week of manual data entry.
+        </div>
+        <div class="project-item" lang="es">
+            <strong>Pipeline de Procesamiento de Datos Empresariales:</strong> Desarrollé solución ETL basada en pandas procesando más de 10,000 filas de datos corporativos diariamente. Automaticé transformación Excel/CSV, actualizaciones de base de datos SQL y generación de reportes. Eliminé 15 horas/semana de entrada manual de datos.
+        </div>
+        
+        <div class="project-item" lang="en">
+            <strong>OCR Document Digitization System:</strong> Implemented automated document extraction workflow using OCR engines. Processes scanned documents, extracts structured data, and populates databases. Reduced document processing time by 80%.
+        </div>
+        <div class="project-item" lang="es">
+            <strong>Sistema de Digitalización OCR de Documentos:</strong> Implementé flujo automatizado de extracción de documentos usando motores OCR. Procesa documentos escaneados, extrae datos estructurados y puebla bases de datos. Reduje tiempo de procesamiento de documentos en 80%.
+        </div>
+        
+        <div class="project-item" lang="en">
+            <strong>Active Directory User Management Bot:</strong> Created Python automation for AD user lifecycle operations including creation, modification, group assignments, and deprovisioning. Integrated with HR systems via API for automated onboarding/offboarding.
+        </div>
+        <div class="project-item" lang="es">
+            <strong>Bot de Gestión de Usuarios Active Directory:</strong> Creé automatización Python para operaciones de ciclo de vida de usuarios AD incluyendo creación, modificación, asignaciones de grupos y desprovisionamiento. Integrado con sistemas HR vía API para onboarding/offboarding automatizado.
+        </div>
+        
+        <div class="project-item" lang="en">
+            <strong>Compliance Audit Logging System:</strong> Developed advanced logging framework capturing all automation operations for audit trails. Generates automated compliance reports with timestamp tracking and change history.
+        </div>
+        <div class="project-item" lang="es">
+            <strong>Sistema de Logging de Auditoría de Cumplimiento:</strong> Desarrollé framework avanzado de logging capturando todas las operaciones de automatización para pistas de auditoría. Genera reportes automatizados de cumplimiento con seguimiento de timestamps e historial de cambios.
+        </div>
+        
+        <div class="project-item" lang="en">
+            <strong>Local LLM Integration:</strong> Deployed open-source language models for automated document analysis and information extraction. Built Python wrapper for processing unstructured text data and generating structured outputs.
+        </div>
+        <div class="project-item" lang="es">
+            <strong>Integración de LLM Local:</strong> Desplegué modelos de lenguaje open-source para análisis automatizado de documentos y extracción de información. Construí wrapper Python para procesamiento de datos de texto no estructurados y generación de salidas estructuradas.
+        </div>
+    </div>
+
+    <h2 lang="en">Education</h2>
+    <h2 lang="es">Educación</h2>
+    
+    <div class="education-item">
+        <div class="job-header">
+            <div>
+                <div class="job-title" lang="en">Telecommunications Engineering</div>
+                <div class="job-title" lang="es">Ingeniería en Telecomunicaciones</div>
+                <div class="company" lang="en">Universidad Nacional A Distancia (UNAD)</div>
+                <div class="company" lang="es">Universidad Nacional A Distancia (UNAD)</div>
+            </div>
+            <div class="date" lang="en">Feb 2022 - Present</div>
+            <div class="date" lang="es">Feb 2022 - Presente</div>
+        </div>
+    </div>
+
+    <div class="education-item">
+        <div class="job-header">
+            <div>
+                <div class="job-title" lang="en">Bachelor's Degree in Philosophy</div>
+                <div class="job-title" lang="es">Licenciatura en Filosofía</div>
+                <div class="company" lang="en">Universidad Pedagogica Nacional</div>
+                <div class="company" lang="es">Universidad Pedagógica Nacional</div>
+            </div>
+            <div class="date" lang="en">Feb 2020 - Present</div>
+            <div class="date" lang="es">Feb 2020 - Presente</div>
+        </div>
+    </div>
+
+    <div class="education-item">
+        <div class="job-header">
+            <div>
+                <div class="job-title" lang="en">Technical Diploma - Administrative Assistance</div>
+                <div class="job-title" lang="es">Técnico - Asistencia Administrativa</div>
+                <div class="company" lang="en">Servicio Nacional De Aprendizaje (SENA)</div>
+                <div class="company" lang="es">Servicio Nacional De Aprendizaje (SENA)</div>
+            </div>
+            <div class="date" lang="en">Completed Nov 2019</div>
+            <div class="date" lang="es">Completado Nov 2019</div>
+        </div>
+    </div>
+
+    <h2 lang="en">Certifications</h2>
+    <h2 lang="es">Certificaciones</h2>
+    <div class="cert-grid" lang="en">
+        <div class="cert-item">• Acronis Backup - Ransomware Defender (2025)</div>
+        <div class="cert-item">• Backup and Disaster Recovery Admin (2025)</div>
+        <div class="cert-item">• IT Troubleshooting Skill Training (2025)</div>
+        <div class="cert-item">• Microsoft Azure Backup Introduction (2025)</div>
+        <div class="cert-item">• Oracle Database Backup & Security (2025)</div>
+        <div class="cert-item">• Information Security Fundamentals (2025)</div>
+        <div class="cert-item">• Linux Operating Systems GNU (2025)</div>
+        <div class="cert-item">• Microsoft Windows 10 Certification (2025)</div>
+    </div>
+    <div class="cert-grid" lang="es">
+        <div class="cert-item">• Acronis Backup - Defensor Ransomware (2025)</div>
+        <div class="cert-item">• Administrador Backup y Recuperación (2025)</div>
+        <div class="cert-item">• Capacitación Resolución Problemas IT (2025)</div>
+        <div class="cert-item">• Introducción Microsoft Azure Backup (2025)</div>
+        <div class="cert-item">• Backup y Seguridad Base Datos Oracle (2025)</div>
+        <div class="cert-item">• Fundamentos Seguridad Información (2025)</div>
+        <div class="cert-item">• Sistemas Operativos Linux GNU (2025)</div>
+        <div class="cert-item">• Certificación Microsoft Windows 10 (2025)</div>
+    </div>
+
+    <h2 lang="en">Additional Information</h2>
+    <h2 lang="es">Información Adicional</h2>
+    <ul lang="en">
+        <li><strong>Languages:</strong> Spanish (Native), English (Technical Reading & Documentation)</li>
+        <li><strong>Availability:</strong> Immediate start, open to remote or hybrid roles, willing to relocate</li>
+        <li><strong>Work Style:</strong> Experience in distributed teams, agile environments, and continuous improvement culture</li>
+        <li><strong>Learning:</strong> Active self-learner with focus on emerging automation technologies and AI integration</li>
+    </ul>
+    <ul lang="es">
+        <li><strong>Idiomas:</strong> Español (Nativo), Inglés (Lectura Técnica y Documentación)</li>
+        <li><strong>Disponibilidad:</strong> Inicio inmediato, abierto a roles remotos o híbridos, dispuesto a relocalización</li>
+        <li><strong>Estilo de Trabajo:</strong> Experiencia en equipos distribuidos, entornos ágiles y cultura de mejora continua</li>
+        <li><strong>Aprendizaje:</strong> Autodidacta activo con enfoque en tecnologías emergentes de automatización e integración IA</li>
+    </ul>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const isSpanish = body.classList.contains('lang-es');
+            
+            if (isSpanish) {
+                body.classList.remove('lang-es');
+                body.classList.add('lang-en');
+                document.getElementById('lang-icon').textContent = '🇪🇸';
+                document.getElementById('lang-text').textContent = 'Ver en Español';
+                document.getElementById('download-btn').href = 'Kevin_Naranjo_Resume_EN.pdf';
+                document.getElementById('download-text').textContent = 'Download PDF';
+                localStorage.setItem('resume-lang', 'en');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-es');
+                document.getElementById('lang-icon').textContent = '🇺🇸';
+                document.getElementById('lang-text').textContent = 'View in English';
+                document.getElementById('download-btn').href = 'Kevin_Naranjo_Resume_ES.pdf';
+                document.getElementById('download-text').textContent = 'Descargar PDF';
+                localStorage.setItem('resume-lang', 'es');
+            }
+        }
+        
+        // Establecer español por defecto al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('resume-lang');
+            
+            // Si no hay preferencia guardada O si la preferencia es español, mostrar español
+            if (!savedLang || savedLang === 'es') {
+                document.body.classList.add('lang-es');
+                document.getElementById('lang-icon').textContent = '🇺🇸';
+                document.getElementById('lang-text').textContent = 'View in English';
+                document.getElementById('download-btn').href = 'Kevin_Naranjo_Resume_ES.pdf';
+                document.getElementById('download-text').textContent = 'Descargar PDF';
+            } else {
+                document.body.classList.add('lang-en');
+                document.getElementById('lang-icon').textContent = '🇪🇸';
+                document.getElementById('lang-text').textContent = 'Ver en Español';
+                document.getElementById('download-btn').href = 'Kevin_Naranjo_Resume_EN.pdf';
+                document.getElementById('download-text').textContent = 'Download PDF';
+            }
+        });
+    </script>
+</body>
+</html>
